@@ -3,4 +3,5 @@
 (provide iter)
 
 (define (iter n f)
-  'TODO)
+  (if (<= n 0) (lambda (x) x)
+      (lambda (x) (f ((iter (- n 1) f) x)))))
