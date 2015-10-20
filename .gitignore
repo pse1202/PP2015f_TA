@@ -1,3 +1,5 @@
 *.bak
+homeworks/hw1-skeleton/compiled/
+homeworks/hw2-skeleton/compiled/
 homeworks/hw*-skeleton/compiled/
 *.DS_Store
