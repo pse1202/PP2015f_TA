@@ -5,7 +5,7 @@
 ; auto-graded. However, S, K, I, v, and a are required for
 ; grading. See hw4-2-grade.rkt for more information.
 (provide react S K I v a)
-
+(require racket/match)
 
 ; Implement react. 
 ;
@@ -23,38 +23,55 @@
 
 (define (react e) ; execute: solution -> string
   (pprint 
-   'TODO
+   (process e)
    ))
 
+(define (proc e)
+  (match e
+    [(cons 'I x) x]
+    [(cons (cons 'K x) y) x]
+    [(cons (cons (cons 'S x) y) z) (cons (cons x z) (cons y z))]
+    [(cons x y) (cons (proc x) (proc y))]
+    [_ e]))
+(define (process e)
+  (if (equal? e (proc e)) e
+      (process (proc e))))
+  
+
 (define S ; S: solution
-  'TODO)
+  'S)
 (define K ; K: solution
-  'TODO)
+  'K)
 (define I ; I: solution
-  'TODO)
+  'I)
 (define (v str) ; v: string -> solution
-  'TODO)
+  str)
 (define (a lhs rhs) ; a: solution * solution -> solution
-  'TODO)
+  (cons lhs rhs))
 
 
 ; You may need the following tree interface.
 
 (define (isS? e) ; isS?: solution -> bool
-  'TODO)
+  (equal? 'S e))
 (define (isK? e) ; isK?: solution -> bool
-  'TODO)
+  (equal? 'K e))
 (define (isI? e) ; isI?: solution -> bool
-  'TODO)
+  (equal? 'I e))
 (define (isv? e) ; isv?: solution -> bool
-  'TODO)
+  (string? e))
 (define (isa? e) ; isa?: solution -> bool
-  'TODO)
+  (pair? e))
 (define (var e) ; var: solution -> string
-  'TODO)
+  e)
 (define (al e) ; al: solution -> solution
-  'TODO)
+  (car e))
 (define (ar e) ; ar: solution -> solution
-  'TODO)
+  (cdr e))
 (define (pprint e) ; pprint: solution -> string
-  'TODO)
+  (match e
+    ['S "S"]
+    ['K "K"]
+    ['I "I"]
+    [(cons x y) (string-append "(" (pprint x) " " (pprint y) ")")]
+    [_ e]))
