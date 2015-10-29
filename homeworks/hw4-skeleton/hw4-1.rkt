@@ -13,6 +13,10 @@
   (listify (encode (treefy frequencies)) '())
   )))
 
+; recursive
+; (tree * int list) -> (tree * int list)
+; order of tree : number of leaf nodes
+; tree is reduced to subtrees in recursion -> finally becomes a leaf node
 (define (listify tree currlist)
   (if (isleaf? tree) (list (cons (cdr tree) (reverse currlist)))
       (append (listify (leftsub tree) (list* 0 currlist)) (listify (rightsub tree) (list* 1 currlist)))))
@@ -20,6 +24,10 @@
 (define (treefy freq)
   (filter (lambda (x) (> (leafval x) 0)) (map (lambda (x) (leaf (car x) (cdr x))) freq)))
 
+; recursive
+; (tree list -> tree)
+; order of tree list : length
+; lngth is reduced by 1 until it reaches 1 (by car treel)
 (define (encode treel)
   (if (<= (length treel) 1) (car treel) (encode (reduce treel))))
 
