@@ -9,8 +9,9 @@
 
 (define (vlencode frequencies) ; vlencode: (string X int) list -> (string X (int list)) list
   (if (= 0 (length frequencies)) '()
+      (if (= 1 (length frequencies)) (list (cons (car (car frequencies)) (list 0)))
   (listify (encode (treefy frequencies)) '())
-  ))
+  )))
 
 (define (listify tree currlist)
   (if (isleaf? tree) (list (cons (cdr tree) (reverse currlist)))
