@@ -8,9 +8,28 @@
 
 
 (define (vlencode frequencies) ; vlencode: (string X int) list -> (string X (int list)) list
-  'TODO
-  )
-  
+  (if (= 0 (length frequencies)) '()
+  (listify (encode (treefy frequencies)) '())
+  ))
+
+(define (listify tree currlist)
+  (if (isleaf? tree) (list (cons (cdr tree) (reverse currlist)))
+      (append (listify (leftsub tree) (list* 0 currlist)) (listify (rightsub tree) (list* 1 currlist)))))
+
+(define (treefy freq)
+  (filter (lambda (x) (> (leafval x) 0)) (map (lambda (x) (leaf (car x) (cdr x))) freq)))
+
+(define (encode treel)
+  (if (<= (length treel) 1) (car treel) (encode (reduce treel))))
+
+(define (reduce treelist)
+  (define sortlist (sort treelist < #:key treeval))
+  (define l (car sortlist))
+  (define r (cadr sortlist))
+  (if (<= (length sortlist) 1) treelist
+      (list* (node l (+ (treeval l) (treeval r)) r) (cddr sortlist))))
+      
+
 ;  The output of vlencode should follow the following form.
 ;  The exact code for each word can be different from this example,
 ;   but the length of the code for each word should be the same.
@@ -33,26 +52,29 @@
 ; You may need the following tree interface (but not mandatory.)
 
 (define (leaf str val) ; leaf: string * value -> tree
-  'TODO)
+  (cons val str))
 
 (define (node lsub val rsub) ; node: tree * value * tree -> tree
-  'TODO)
+  (cons val (cons lsub rsub)))
 
 (define (isleaf? tree) ; isleaf?: tree -> bool
-  'TODO)
+  (string? (cdr tree)))
 
 (define (leftsub tree) ; leftsub: tree -> tree
-  'TODO)
+  (car (cdr tree)))
 
 (define (rightsub tree) ; rightsub: tree -> tree
-  'TODO)
+  (cdr (cdr tree)))
 
 (define (leafval tree) ; leafval: tree -> value
-  'TODO)
+  (car tree))
 
 (define (leafstr tree) ; leftstr: tree -> string
-  'TODO)
+  (cdr tree))
 
 (define (rootval tree) ; rootval: tree -> value
-  'TODO)
+  (car tree))
+
+(define (treeval tree)
+  (car tree))
 
