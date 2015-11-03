@@ -3,10 +3,12 @@
 (provide empty link case-list)
 
 (define empty
-  'TODO)
+  'empty)
 
 (define (link v l)
-  'TODO)
+  (cons v l))
 
 (define (case-list f1 f2 l)
-  'TODO)
+  (match l
+    [(cons x y) (f2 x y)]
+    [ 'empty (f1)]))

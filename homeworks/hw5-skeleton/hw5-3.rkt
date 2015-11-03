@@ -6,16 +6,16 @@
 (provide is-empty? fst rest length nth-elmt map reduce)
 
 (define (is-empty? l)
-  'TODO)
+  (equal? l empty))
 
 (define (fst l)
-  'TODO)
+  (case-list (lambda () '()) (lambda (h t) h) l))
 
 (define (rest l)
-  'TODO)
+  (case-list (lambda () 'ERROR) (lambda (h t) t) l))
 
 (define (length l)
-  'TODO)
+  (case-list (lambda () 0) (lambda (x y) (+ 1 (length y))) l))
 
 (define (nth-elmt l i)
   'TODO)
@@ -25,3 +25,6 @@
 
 (define (reduce l f s)
   'TODO)
+  
+
+  
