@@ -11,4 +11,4 @@
 (define (case-list f1 f2 l)
   (match l
     [(cons x y) (f2 x y)]
-    [ 'empty (f1)]))
+    [ 'empty (f1 'unit)]))

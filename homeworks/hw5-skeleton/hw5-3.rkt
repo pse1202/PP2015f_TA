@@ -10,22 +10,23 @@
   (equal? l empty))
 
 (define (fst l)
-  (case-list (lambda () (inr unit)) (lambda (h t) (inl h)) l))
+  (case-list (lambda (u) (inr unit)) (lambda (h t) (inl h)) l))
 
 (define (rest l)
-  (case-list (lambda () (inr unit)) (lambda (h t) (inl t)) l))
+  (case-list (lambda (u) (inr unit)) (lambda (h t) (inl t)) l))
 
 (define (length l)
-  (case-list (lambda () 0) (lambda (x y) (+ 1 (length y))) l))
+  (case-list (lambda (u) 0) (lambda (x y) (+ 1 (length y))) l))
 
 (define (nth-elmt l i)
-  (if (> i 0) (case-list (lambda () (inr unit)) (lambda (x y) (nth-elmt y (- i 1))) l) 'TODO))
+  (if (> i 0) (case-list (lambda (u) (inr unit)) (lambda (x y) (nth-elmt y (- i 1))) l)
+      (if (= i 0) (fst l) unit)))
 
 (define (map f l)
-  (case-list (lambda () '()) (lambda (x y) (link (f x) (map f y))) l))
+  (case-list (lambda (u) '()) (lambda (x y) (link (f x) (map f y))) l))
 
 (define (reduce l f s)
-  'TODO)
+  (case-list (lambda (u) s) (lambda (x y) (reduce y f (f x s))) l))
   
 
   
