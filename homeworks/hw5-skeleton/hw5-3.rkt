@@ -6,27 +6,27 @@
 (provide is-empty? fst rest length nth-elmt map reduce)
 (define unit '())
 
-(define (is-empty? l)
-  (equal? l empty))
+(define (is-empty? #| t list -> bool |# l #|t list |#)
+  (equal? l empty) #|bool|#)
 
-(define (fst l)
-  (case-list (lambda (u) (inr unit)) (lambda (h t) (inl h)) l))
+(define (fst #|t list -> t + unit|# l #|t list|#)
+  (case-list #|unit -> t + unit * (t * t list -> t + unit) * t list -> t + unit|# (lambda (u) #|unit -> t + unit|# (inr unit)) (lambda (h t) #|t * t list -> t + unit|# (inl h)) #|t + unit|# l))
 
-(define (rest l)
-  (case-list (lambda (u) (inr unit)) (lambda (h t) (inl t)) l))
+(define (rest #|t list -> t list + unit|# l)
+  (case-list (lambda (u) (inr unit) #|t list + unit|#) (lambda (h #|t|# t #|t list|#) (inl t) #|t list + unit|#) l) #|t list + unit|#)
 
-(define (length l)
+(define (length #|t list -> int|# l)
   (case-list (lambda (u) 0) (lambda (x y) (+ 1 (length y))) l))
 
-(define (nth-elmt l i)
-  (if (> i 0) (case-list (lambda (u) (inr unit)) (lambda (x y) (nth-elmt y (- i 1))) l)
-      (if (= i 0) (fst l) unit)))
+(define (nth-elmt #|t list * int -> t + unit|# l i)
+  (if (> i 0) #|bool|# (case-list (lambda (u) (inr unit) #|t + unit|#) (lambda (x #|t|# y #|t list|#) (nth-elmt y (- i 1)) #|t + unit|#) l)
+      (if (= i 0) (fst l) #|t + unit|# (inr unit) #|t + unit|#)) #|t + unit|#)
 
-(define (map f l)
-  (case-list (lambda (u) '()) (lambda (x y) (link (f x) (map f y))) l))
+(define (map #|(t -> a) * t list -> a list|# f #|t -> a|# l #|t list|#)
+  (case-list (lambda (u) empty #|a list|#) (lambda (x #|t|# y #|t list|#) (link (f x) #|a|#  (map f y) #|a list|#)) l) #|a list|#)
 
-(define (reduce l f s)
-  (case-list (lambda (u) s) (lambda (x y) (reduce y f (f x s))) l))
+(define (reduce #|t list * (t * a -> a) * a -> a|# l #|t list|# f #|t * a -> a|# s #|a|#)
+  (case-list (lambda (u #|unit|#) s #|a|#) (lambda (x #|t|# y #|t list|#) (reduce y  f (f x s) #|a|#)) l)#|a|#)
   
 
   
