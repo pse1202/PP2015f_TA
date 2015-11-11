@@ -90,6 +90,7 @@
   (tree-to-array (rotate-tree (array-to-tree f))))
 
 (define (neighbor-array location f) ; neighbor-array: location * form -> int
+  (if (basis? f) 0
   (+ (latticeblack? (cdr f) (loc-to-lattice location (cons 1 1)))
      (latticeblack? (cdr f) (loc-to-lattice location (cons 0 1)))
      (latticeblack? (cdr f) (loc-to-lattice location (cons -1 1)))
@@ -97,7 +98,7 @@
      (latticeblack? (cdr f) (loc-to-lattice location (cons -1 0)))
      (latticeblack? (cdr f) (loc-to-lattice location (cons 1 -1)))
      (latticeblack? (cdr f) (loc-to-lattice location (cons 0 -1)))
-     (latticeblack? (cdr f) (loc-to-lattice location (cons -1 -1)))))
+     (latticeblack? (cdr f) (loc-to-lattice location (cons -1 -1))))))
 
 (define (latticeblack? f l)
   (if (or (< (car l) 0) (< (cdr l) 0) (>= (cdr l) (length f)) (>= (car l) (length f))) 0
@@ -131,7 +132,9 @@
 ; as form -> string.
 ; Read hw5-4-selfgrader.rkt for formatting.
 (define (pprint-array f) ; pprint-array: form -> string
-  (arrayreduce (cdr f) ""))
+  (if (equal? 'B f) "B\n"
+      (if (equal? 'W f) "W\n"
+  (arrayreduce (cdr f) ""))))
 
 (define (arrayreduce l s)
   (string-append* (map list-to-string l)))
