@@ -8,5 +8,20 @@ type tourna = LEAF of team
             | NODE of tourna * tourna
 
 let rec parenize (t: tourna): string =
-  raise TODO
-
+	match t with
+	| LEAF Korea -> "Korea"
+	| LEAF France -> "France"
+	| LEAF Usa -> "Usa"
+	| LEAF Brazil -> "Brazil"
+	| LEAF Japan -> "Japan"
+	| LEAF Nigeria -> "Nigeria"
+	| LEAF Cameroon -> "Cameroon"
+	| LEAF Poland -> "Poland"
+	| LEAF Portugal -> "Portugal"
+	| LEAF Italy -> "Italy"
+	| LEAF Germany -> "Germany"
+	| LEAF Norway -> "Norway"
+	| LEAF Sweden -> "Sweden"
+	| LEAF England -> "England"
+	| LEAF Argentina -> "Argentina"
+	| NODE (x,y) -> "("^(parenize x)^" "^(parenize y)^")"
