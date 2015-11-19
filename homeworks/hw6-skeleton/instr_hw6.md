@@ -1,3 +1,6 @@
+## 수정 사항 ##
+- 11월 18일 : 6-7 채점기 버그 수정, 자가채점기용 makefile 추가 (수강생분들의 pull request를 merge)
+
 ## HW6 ##
 이번 숙제는 OCaml 프로그래밍을 요구합니다. 다음 실습 시간에 OCaml 튜토리얼을 진행할 것인데, 아래 링크의 OCaml tutorial을 참고하셔서 숙제를 진행하셔도 됩니다.
 
@@ -20,6 +23,11 @@ OCaml 프로그래밍하기
   ocamlc hw6_2.ml
   
   ocaml commonGrade.cmo hw6_2.cmo hw6_2_selfgrader.ml
+  ```
+  
+- 또는 `make`를 이용한다. 가령 2번 과제를 채점하려면 아래 명령을 실행한다.
+  ```
+  make 2
   ```
   
 OCaml 도움 링크
