@@ -1,39 +1,6 @@
 open CommonGrade
 open Hw6_7
 
-let p1 = 
-  SEQUENCE (ASSIGN (NUM 1),
-	    REPEAT
-	      (CHOICE (EQ (NUM 1, ASSIGN (ADD (VAR,NUM 1))),
-		       NEQ (NUM 1, ASSIGN (SUB (VAR,NUM 1))))
-	   ))
-
-let p2 = REPEAT (ASSIGN (ADD (VAR,NUM 1)))
-
-let _ = output (fun () -> (exeval p1 (-1)) = [1; 2])
-
-let _ = output (fun () -> (exeval p2 1) = [1; 2; 3; 4; 5])
-
-let p4 = 
-(REPEAT 
-	(SEQUENCE 
-		(
-			(CHOICE (
-				(ASSIGN (ADD (VAR, NUM 1))), 
-				(ASSIGN (SUB (VAR, NUM 1))))
-			), 
-			(ASSIGN (ADD (VAR, VAR)))
-		)
-	)
-)
-
-let _ = output (fun () -> (exeval p4 0) = [-2;0;2])
-let _ = output (fun () -> (exeval p4 1) = [-2;0;1; 2;4])
-let _ = output (fun () -> (exeval p4 (-1)) = [-4;-2;-1;0;2])
-let _ = output (fun () -> (exeval p4 2) = [2])
-pen CommonGrade
-open Hw6_7
-
 let same_list a b =
     (List.for_all (fun x -> List.mem x b) a) && (List.for_all (fun x -> List.mem x a) b)
 
@@ -55,6 +22,18 @@ let p5 = REPEAT(CHOICE(ASSIGN(ADD(VAR,NUM(1))),ASSIGN(SUB(VAR,NUM(1)))))
 let p6 = REPEAT(CHOICE(EQ(NUM(1),ASSIGN(ADD(VAR,NUM(1)))),NEQ(NUM(1),ASSIGN(SUB(VAR,NUM(1))))))
 
 let p7 = SEQUENCE(REPEAT(CHOICE(ASSIGN(ADD(VAR,NUM(1))),EQ(NUM(5),ASSIGN(SUB(VAR,NUM(1)))))),REPEAT(CHOICE(ASSIGN(SUB(VAR,NUM(1))),EQ(NUM(-5),ASSIGN(ADD(VAR,NUM(1)))))))
+let p8 = 
+(REPEAT 
+	(SEQUENCE 
+		(
+			(CHOICE (
+				(ASSIGN (ADD (VAR, NUM 1))), 
+				(ASSIGN (SUB (VAR, NUM 1))))
+			), 
+			(ASSIGN (ADD (VAR, VAR)))
+		)
+	)
+)
 
 let _ = output (fun () -> same_list (exeval p1 (-1)) [1; 2])
 let _ = output (fun () -> same_list (exeval p2 1) [1; 2; 3; 4; 5])
@@ -82,7 +61,7 @@ let _ = output (fun () -> same_list (exeval prg5 2) [2; 3]) (* [2 3] *)
 let prg6 = CHOICE( CHOICE( REPEAT (ASSIGN (ADD (VAR, VAR))), ASSIGN (NUM (-2))), ASSIGN (NUM (-5)) )
 let _ = output (fun () -> same_list (exeval prg6 1) [-5; -2 ;1 ;2 ;4])    (* [-5 -2 1 2 4] *) 
 
-let prg7 =  REPEAT( REPEAT( REPEAT( REPEAT (REPEAT (CHOICE( ASSIGN ( ADD (VAR, NUM 1)), ASSIGN ( SUB (VAR, NUM 1) ) ))) ) ));; 
+let prg7 =  REPEAT (CHOICE( ASSIGN ( ADD (VAR, NUM 1)), ASSIGN ( SUB (VAR, NUM 1) ) )) 
 (*let prg7 = REPEAT (CHOICE( ASSIGN ( ADD (VAR, NUM 1)), ASSIGN ( SUB (VAR, NUM 1) ) ));; 
   same as above, but if too slow then try me instead :) *) 
 let _ = output (fun () -> same_list (exeval prg7 4) [-5; -4; -3; -2; -1; 0;1;2;3;4;5])    (* [-5 -4 -3 -2 -1 0 1 2 3 4 5] *) 
