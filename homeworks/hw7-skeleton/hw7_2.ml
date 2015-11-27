@@ -21,9 +21,19 @@ module SkiLiquid : SKI = struct
 
   let rec react: liquid -> liquid =
     fun l ->
-    raise ETODO
+    match l with
+    | M (I, x) -> react x
+    | M (M (K, x), _) -> react x
+    | M (M (M (S, x), y), z) -> react (M (M (x, z), M (y, z)))
+    | M (x,y) -> (M (react x, react y))
+    | _ -> l
 
-  let pprint: liquid -> string =
+  let rec pprint: liquid -> string =
     fun l ->
-    raise ETODO
+    match l with
+    | S -> "S"
+    | K -> "K"
+    | I -> "I"
+    | M (x,y) -> "("^(pprint x)^" "^(pprint y)^")"
+    | V s -> s
 end
