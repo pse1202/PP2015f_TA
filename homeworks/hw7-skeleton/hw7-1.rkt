@@ -7,7 +7,7 @@
 (provide bstree-make bstree-add-elmt bstree-del-elmt bstree-find-elmt)
 
 (define (bstree-make)
-  'TODO)
+  '())
 
 (define (bstree-add-elmt t k v)
   'TODO)
@@ -17,3 +17,6 @@
 
 (define (bstree-find-elmt t k)
   'TODO)
+
+(define (bstree-val t)
+  (car t))
