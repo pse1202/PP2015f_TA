@@ -57,13 +57,15 @@
     [(< (key t) k) (bstree-add-elmt (right t) k v)])
   )
 
+(define (clear t)
+  (set-mcar! t '()) (set-mcar! (mcdr t) '()) (set-mcar! (mcdr (mcdr t)) '()))
+
 (define (bstree-del-elmt t k)
   (cond
     [(empty-tree? t) #f]
     [(= (key t) k) (begin
                      (cond
-                     [(and (empty-tree? (left t)) (empty-tree? (right t)))
-                      (set-mcar! t '()) (set-mcar! (mcdr t) '()) (set-mcar! (mcdr (mcdr t)) '())]
+                     [(and (empty-tree? (left t)) (empty-tree? (right t))) (clear t)]
                      [(empty-tree? (left t)) (begin
                                           (define root (succ t))
                                           (set-mcar! t root)
