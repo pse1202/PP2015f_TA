@@ -20,19 +20,19 @@
   (set-mcar! (mcdr (mcdr t)) (bstree-make)))
 
 (define (pair t)
-  (mlist-ref t 0))
+  (mcar t))
 
 (define (left t)
-  (mlist-ref t 1))
+  (mcar (mcdr t )))
 
 (define (right t)
-  (mlist-ref t 2))
+  (mcar (mcdr (mcdr t))))
 
 (define (key t)
-  (mcar (mcar t)))
+  (mcar (pair t)))
 
 (define (val t)
-  (mcdr (mcar t)))
+  (mcdr (pair t)))
 
 (define (empty-tree? t)
   (empty? (mcar t)))
@@ -66,12 +66,12 @@
     [(= (key t) k) (begin
                      (cond
                      [(and (empty-tree? (left t)) (empty-tree? (right t))) (clear t)]
-                     [(empty-tree? (left t)) (begin
+                     [(not (empty-tree? (right t))) (begin
                                           (define root (succ t))
                                           (set-mcar! t root)
                                           (bstree-del-elmt (right t) (mcar root))
                                           )]
-                     [(empty-tree? (right t)) (begin
+                     [(not (empty-tree? (left t))) (begin
                                            (define root (pred t))
                                            (set-mcar! t root)
                                            (bstree-del-elmt (left t) (mcar root))
