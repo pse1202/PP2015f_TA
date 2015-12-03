@@ -21,10 +21,14 @@ module SkiLiquid : SKI = struct
 
   let rec react: liquid -> liquid =
     fun l ->
+    if l = process l then l else react (process l)
+
+
+  and process l =
     match l with
-    | M (I, x) -> react x
-    | M (M (K, x), _) -> react x
-    | M (M (M (S, x), y), z) -> react (M (M (x, z), M (y, z)))
+    | M (I, x) -> x
+    | M (M (K, x), _) -> x
+    | M (M (M (S, x), y), z) -> (M (M (x, z), M (y, z)))
     | M (x,y) -> (M (react x, react y))
     | _ -> l
 
