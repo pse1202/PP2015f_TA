@@ -28,6 +28,7 @@ let rec parenize n =
 
 let rec drop (t: tourna) (d: team): string =
 	match t with
+	| LEAF d -> ""
 	| NODE(LEAF team,rest)|NODE(rest,LEAF team) -> parenize rest
 	| NODE(x,y) -> "("^(drop x d)^" "^(drop y d)^")"
 	| _ -> parenize t
