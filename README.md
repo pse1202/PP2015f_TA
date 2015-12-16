@@ -26,13 +26,14 @@ TA Email: (pp2015fall at sf dot snu dot ac dot kr)
 * [Lab Materials](/lab)
 
 ## Announcement #
+* 교수님께서 수업시간에 말씀하신 대로, 수요일 강의는 없습니다. 강의는 모두 종료되었습니다.
+* 과제 7번 채점에 쓰인 [sum.rkt](homeworks/hw7-sum)을 확인하실 수 있습니다.
+* 숙제 1~7의 결과를 [여기](https://docs.google.com/spreadsheets/d/1J0w3gUf_1PQ66Gbj5EzDioLTFdnxlBIscW1CXRWG0-k/edit?usp=sharing)서 확인하세요.
 * 7일 이상 늦은 제출의 경우 채점은 학기 말에 일괄적으로 한 번 시행합니다.
 * 5-5 점수가 약간 수정되었습니다.
 * 늦은 제출의 기한을 늦췄습니다. (12/18 금 자정)
-* 숙제 4, 5, 6의 결과를 [여기](https://docs.google.com/spreadsheets/d/1J0w3gUf_1PQ66Gbj5EzDioLTFdnxlBIscW1CXRWG0-k/edit?usp=sharing)서 확인하세요.
 * 원래 올라와있던 컴파일된 파서가 OCaml 4.02.3에서 컴파일되었으므로 martini에서 사용이 안되는 문제가 있었습니다. 4.02.1에서 [새로 컴파일한 파서](homeworks/proj-skeleton-with-parser/ocaml4021.tar)를 올려드립니다.
   + proj.cmo, proj.cmi 등은 무시해주세요.
-* 실습은 끝났습니다. 강의는 12/14, 12/16 2번 남아있습니다.
 * 숙제 3-3의 `maze-pp` 관련 재채점이 완료되었습니다. 2014-10093 학생의 점수가 올랐습니다.
 * Project의 [뼈대코드](homeworks/proj-skeleton)는 12/02(수) 오후 10시 40분에 업로드한 것이 안정된 버전입니다. [proj-instruction](homeworks/proj-skeleton/proj_instr.md)를 꼭 읽고 진행해주세요.
 * 11/30(월)은 휴강, 12/2(수)는 기존과 같이 실습을 진행합니다.
@@ -43,10 +44,9 @@ TA Email: (pp2015fall at sf dot snu dot ac dot kr)
 
 ## 출석 ##
 * 출석 체크 자료가 올라왔습니다. [이 곳](attendance/instruction.md)에서 정보를 확인하세요.
- + 출석 체크용 사진 촬영은 쉬는 시간이 끝난 다음 5분 후, 또는 17:30에 이루어집니다.
- + 9/23(수) 수업부터는 출석 체크 시간에 자리를 비울 경우 출석을 인정해드리지 않을 예정이니 주의하시기 바랍니다.
- + 현재 11/25(수)까지의 출석 체크 사진이 업로드되어 있습니다.
- + 출석 체크 중복 사례와 관련하여 이슈를 등록하였습니다. 본인의 번호에 다른 학번이 입력되었다 생각되시면 이슈를 통해 조율하시기 바랍니다.
+ + 출석 체크용 스프레드시트에 학번 입력을 프로젝트 종료일까지 완료해주시기 바랍니다. 이후에 입력되는 정보는 출석체크에 반영되지 않을 수도 있습니다.
+ + 현재 모든 출석 체크 사진이 업로드되어 있습니다.
+ + 출석 체크 중복 사례와 관련하여 [이슈](https://github.com/snu-sf-class/PP2015f_TA/issues/154)를 등록하였습니다. 본인의 번호에 다른 학번이 입력되었다 생각되시면 이슈를 통해 조율하시기 바랍니다.
 
 ## 실습 ##
 * 실습은 10/28일부터 한 반으로 운영합니다. (오후 4:00~, 302동 소프트웨어 실습실)
