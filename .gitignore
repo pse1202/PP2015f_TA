@@ -1,5 +1,5 @@
 *.bak
-homeworks/hw*-skeleton/compiled/
+homeworks/*/compiled/
 *.DS_Store
 *.cmi
 *.cmo
