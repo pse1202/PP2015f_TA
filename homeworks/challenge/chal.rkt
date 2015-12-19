@@ -17,11 +17,17 @@
 
 (define (emptyenv) identity)
 
+(struct closure (args (env #:mutable) body))
+
 (define (bind def env)
   (lambda (x) (if (eq? x (car def)) (eval-env (car (cdr def)) env) (search env (car def)))))
 
 (define (search env var)
   (if (eq? (env var) var) (raise (error "Unbound Variable")) (env var)))
+
+(define (bind-rec def env defs)
+  (lambda (x) (if (eq? x (car def)) (eval-env (car (cdr def)) env) (search env (car def)))))
+
 
 (define (base? e)
   (or (boolean? e)
@@ -35,6 +41,10 @@
 
 (define (valid-def? defs)
   (andmap def? defs))
+
+(define (valid-arg? args)
+  'TODO)
+
 
 (define (eval-env e env)
   (if (base? e) e
@@ -54,9 +64,14 @@
             [(list 'if e1 e2 e3) (if (eval-env e1 env) (eval-env e2 env) (eval-env e3 env))]
             [(list 'let defs body) (if (valid-def? defs)
                                          (eval-env body (foldl bind env defs))
-                                         (raise (error "let : bad syntax")))]
-            [(list 'letrec defs body) 'TODO]
-            [(list 'lambda args body) 'TODO]
-            [else 'TODO]
+                                         (raise (error "let: bad syntax")))]
+            [(list 'letrec defs body) (if (valid-def? defs)
+                                          (eval-env body (foldl bind env defs))
+                                          (raise (error "letrec: bad syntax")))]
+            [(list 'lambda args body) (if (valid-arg? args)
+                                          (closure args env body)
+                                          (raise (error "lambda: bad syntax")))]
+            [else (eval-env (closure-body (eval-env (car e) env))
+                            (foldl bind env (map list (closure-args (eval-env (car e) env)) (map (lambda (x) (eval-env x env)) (cdr e)))))]
             )
           (raise (error "Syntax Error")))))))
